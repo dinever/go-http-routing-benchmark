@@ -37,11 +37,9 @@ var gplusAPI = []route{
 
 var (
 	gplusAce         http.Handler
-	gplusBear        http.Handler
 	gplusBeego       http.Handler
 	gplusBone        http.Handler
 	gplusDenco       http.Handler
-	gplusEcho        http.Handler
 	gplusGin         http.Handler
 	gplusGocraftWeb  http.Handler
 	gplusGoji        http.Handler
@@ -59,11 +57,11 @@ var (
 	gplusPossum      http.Handler
 	gplusR2router    http.Handler
 	gplusRevel       http.Handler
-	gplusRivet       http.Handler
 	gplusTango       http.Handler
 	gplusTigerTonic  http.Handler
 	gplusTraffic     http.Handler
 	gplusVulcan      http.Handler
+	gplusGolf        http.Handler
 	// gplusZeus        http.Handler
 )
 
@@ -73,9 +71,6 @@ func init() {
 	calcMem("Ace", func() {
 		gplusAce = loadAce(gplusAPI)
 	})
-	calcMem("Bear", func() {
-		gplusBear = loadBear(gplusAPI)
-	})
 	calcMem("Beego", func() {
 		gplusBeego = loadBeego(gplusAPI)
 	})
@@ -84,9 +79,6 @@ func init() {
 	})
 	calcMem("Denco", func() {
 		gplusDenco = loadDenco(gplusAPI)
-	})
-	calcMem("Echo", func() {
-		gplusEcho = loadEcho(gplusAPI)
 	})
 	calcMem("Gin", func() {
 		gplusGin = loadGin(gplusAPI)
@@ -139,9 +131,6 @@ func init() {
 	calcMem("Revel", func() {
 		gplusRevel = loadRevel(gplusAPI)
 	})
-	calcMem("Rivet", func() {
-		gplusRivet = loadRivet(gplusAPI)
-	})
 	calcMem("Tango", func() {
 		gplusTango = loadTango(gplusAPI)
 	})
@@ -153,6 +142,9 @@ func init() {
 	})
 	calcMem("Vulcan", func() {
 		gplusVulcan = loadVulcan(gplusAPI)
+	})
+	calcMem("Golf", func() {
+		gplusGolf = loadGolf(gplusAPI)
 	})
 	// calcMem("Zeus", func() {
 	// 	gplusZeus = loadZeus(gplusAPI)
@@ -166,10 +158,6 @@ func BenchmarkAce_GPlusStatic(b *testing.B) {
 	req, _ := http.NewRequest("GET", "/people", nil)
 	benchRequest(b, gplusAce, req)
 }
-func BenchmarkBear_GPlusStatic(b *testing.B) {
-	req, _ := http.NewRequest("GET", "/people", nil)
-	benchRequest(b, gplusBear, req)
-}
 func BenchmarkBeego_GPlusStatic(b *testing.B) {
 	req, _ := http.NewRequest("GET", "/people", nil)
 	benchRequest(b, gplusBeego, req)
@@ -181,10 +169,6 @@ func BenchmarkBone_GPlusStatic(b *testing.B) {
 func BenchmarkDenco_GPlusStatic(b *testing.B) {
 	req, _ := http.NewRequest("GET", "/people", nil)
 	benchRequest(b, gplusDenco, req)
-}
-func BenchmarkEcho_GPlusStatic(b *testing.B) {
-	req, _ := http.NewRequest("GET", "/people", nil)
-	benchRequest(b, gplusEcho, req)
 }
 func BenchmarkGin_GPlusStatic(b *testing.B) {
 	req, _ := http.NewRequest("GET", "/people", nil)
@@ -254,10 +238,6 @@ func BenchmarkRevel_GPlusStatic(b *testing.B) {
 	req, _ := http.NewRequest("GET", "/people", nil)
 	benchRequest(b, gplusRevel, req)
 }
-func BenchmarkRivet_GPlusStatic(b *testing.B) {
-	req, _ := http.NewRequest("GET", "/people", nil)
-	benchRequest(b, gplusRivet, req)
-}
 func BenchmarkTango_GPlusStatic(b *testing.B) {
 	req, _ := http.NewRequest("GET", "/people", nil)
 	benchRequest(b, gplusTango, req)
@@ -274,6 +254,10 @@ func BenchmarkVulcan_GPlusStatic(b *testing.B) {
 	req, _ := http.NewRequest("GET", "/people", nil)
 	benchRequest(b, gplusVulcan, req)
 }
+func BenchmarkGolf_GPlusStatic(b *testing.B) {
+	req, _ := http.NewRequest("GET", "/people", nil)
+	benchRequest(b, gplusGolf, req)
+}
 
 // func BenchmarkZeus_GPlusStatic(b *testing.B) {
 // 	req, _ := http.NewRequest("GET", "/people", nil)
@@ -284,10 +268,6 @@ func BenchmarkVulcan_GPlusStatic(b *testing.B) {
 func BenchmarkAce_GPlusParam(b *testing.B) {
 	req, _ := http.NewRequest("GET", "/people/118051310819094153327", nil)
 	benchRequest(b, gplusAce, req)
-}
-func BenchmarkBear_GPlusParam(b *testing.B) {
-	req, _ := http.NewRequest("GET", "/people/118051310819094153327", nil)
-	benchRequest(b, gplusBear, req)
 }
 func BenchmarkBeego_GPlusParam(b *testing.B) {
 	req, _ := http.NewRequest("GET", "/people/118051310819094153327", nil)
@@ -300,10 +280,6 @@ func BenchmarkBone_GPlusParam(b *testing.B) {
 func BenchmarkDenco_GPlusParam(b *testing.B) {
 	req, _ := http.NewRequest("GET", "/people/118051310819094153327", nil)
 	benchRequest(b, gplusDenco, req)
-}
-func BenchmarkEcho_GPlusParam(b *testing.B) {
-	req, _ := http.NewRequest("GET", "/people/118051310819094153327", nil)
-	benchRequest(b, gplusEcho, req)
 }
 func BenchmarkGin_GPlusParam(b *testing.B) {
 	req, _ := http.NewRequest("GET", "/people/118051310819094153327", nil)
@@ -373,10 +349,6 @@ func BenchmarkRevel_GPlusParam(b *testing.B) {
 	req, _ := http.NewRequest("GET", "/people/118051310819094153327", nil)
 	benchRequest(b, gplusRevel, req)
 }
-func BenchmarkRivet_GPlusParam(b *testing.B) {
-	req, _ := http.NewRequest("GET", "/people/118051310819094153327", nil)
-	benchRequest(b, gplusRivet, req)
-}
 func BenchmarkTango_GPlusParam(b *testing.B) {
 	req, _ := http.NewRequest("GET", "/people/118051310819094153327", nil)
 	benchRequest(b, gplusTango, req)
@@ -393,6 +365,10 @@ func BenchmarkVulcan_GPlusParam(b *testing.B) {
 	req, _ := http.NewRequest("GET", "/people/118051310819094153327", nil)
 	benchRequest(b, gplusVulcan, req)
 }
+func BenchmarkGolf_GPlusParam(b *testing.B) {
+	req, _ := http.NewRequest("GET", "/people/118051310819094153327", nil)
+	benchRequest(b, gplusGolf, req)
+}
 
 // func BenchmarkZeus_GPlusParam(b *testing.B) {
 // 	req, _ := http.NewRequest("GET", "/people/118051310819094153327", nil)
@@ -403,10 +379,6 @@ func BenchmarkVulcan_GPlusParam(b *testing.B) {
 func BenchmarkAce_GPlus2Params(b *testing.B) {
 	req, _ := http.NewRequest("GET", "/people/118051310819094153327/activities/123456789", nil)
 	benchRequest(b, gplusAce, req)
-}
-func BenchmarkBear_GPlus2Params(b *testing.B) {
-	req, _ := http.NewRequest("GET", "/people/118051310819094153327/activities/123456789", nil)
-	benchRequest(b, gplusBear, req)
 }
 func BenchmarkBeego_GPlus2Params(b *testing.B) {
 	req, _ := http.NewRequest("GET", "/people/118051310819094153327/activities/123456789", nil)
@@ -419,10 +391,6 @@ func BenchmarkBone_GPlus2Params(b *testing.B) {
 func BenchmarkDenco_GPlus2Params(b *testing.B) {
 	req, _ := http.NewRequest("GET", "/people/118051310819094153327/activities/123456789", nil)
 	benchRequest(b, gplusDenco, req)
-}
-func BenchmarkEcho_GPlus2Params(b *testing.B) {
-	req, _ := http.NewRequest("GET", "/people/118051310819094153327/activities/123456789", nil)
-	benchRequest(b, gplusEcho, req)
 }
 func BenchmarkGin_GPlus2Params(b *testing.B) {
 	req, _ := http.NewRequest("GET", "/people/118051310819094153327/activities/123456789", nil)
@@ -492,10 +460,6 @@ func BenchmarkRevel_GPlus2Params(b *testing.B) {
 	req, _ := http.NewRequest("GET", "/people/118051310819094153327/activities/123456789", nil)
 	benchRequest(b, gplusRevel, req)
 }
-func BenchmarkRivet_GPlus2Params(b *testing.B) {
-	req, _ := http.NewRequest("GET", "/people/118051310819094153327/activities/123456789", nil)
-	benchRequest(b, gplusRivet, req)
-}
 func BenchmarkTango_GPlus2Params(b *testing.B) {
 	req, _ := http.NewRequest("GET", "/people/118051310819094153327/activities/123456789", nil)
 	benchRequest(b, gplusTango, req)
@@ -512,6 +476,10 @@ func BenchmarkVulcan_GPlus2Params(b *testing.B) {
 	req, _ := http.NewRequest("GET", "/people/118051310819094153327/activities/123456789", nil)
 	benchRequest(b, gplusVulcan, req)
 }
+func BenchmarkGolf_GPlus2Params(b *testing.B) {
+	req, _ := http.NewRequest("GET", "/people/118051310819094153327/activities/123456789", nil)
+	benchRequest(b, gplusGolf, req)
+}
 
 // func BenchmarkZeus_GPlus2Params(b *testing.B) {
 // 	req, _ := http.NewRequest("GET", "/people/118051310819094153327/activities/123456789", nil)
@@ -522,9 +490,6 @@ func BenchmarkVulcan_GPlus2Params(b *testing.B) {
 func BenchmarkAce_GPlusAll(b *testing.B) {
 	benchRoutes(b, gplusAce, gplusAPI)
 }
-func BenchmarkBear_GPlusAll(b *testing.B) {
-	benchRoutes(b, gplusBear, gplusAPI)
-}
 func BenchmarkBeego_GPlusAll(b *testing.B) {
 	benchRoutes(b, gplusBeego, gplusAPI)
 }
@@ -533,9 +498,6 @@ func BenchmarkBone_GPlusAll(b *testing.B) {
 }
 func BenchmarkDenco_GPlusAll(b *testing.B) {
 	benchRoutes(b, gplusDenco, gplusAPI)
-}
-func BenchmarkEcho_GPlusAll(b *testing.B) {
-	benchRoutes(b, gplusEcho, gplusAPI)
 }
 func BenchmarkGin_GPlusAll(b *testing.B) {
 	benchRoutes(b, gplusGin, gplusAPI)
@@ -588,9 +550,6 @@ func BenchmarkR2router_GPlusAll(b *testing.B) {
 func BenchmarkRevel_GPlusAll(b *testing.B) {
 	benchRoutes(b, gplusRevel, gplusAPI)
 }
-func BenchmarkRivet_GPlusAll(b *testing.B) {
-	benchRoutes(b, gplusRivet, gplusAPI)
-}
 func BenchmarkTango_GPlusAll(b *testing.B) {
 	benchRoutes(b, gplusTango, gplusAPI)
 }
@@ -602,6 +561,9 @@ func BenchmarkTraffic_GPlusAll(b *testing.B) {
 }
 func BenchmarkVulcan_GPlusAll(b *testing.B) {
 	benchRoutes(b, gplusVulcan, gplusAPI)
+}
+func BenchmarkGolf_GPlusAll(b *testing.B) {
+	benchRoutes(b, gplusGolf, gplusAPI)
 }
 
 // func BenchmarkZeus_GPlusAll(b *testing.B) {

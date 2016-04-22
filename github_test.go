@@ -275,11 +275,9 @@ var githubAPI = []route{
 
 var (
 	githubAce         http.Handler
-	githubBear        http.Handler
 	githubBeego       http.Handler
 	githubBone        http.Handler
 	githubDenco       http.Handler
-	githubEcho        http.Handler
 	githubGin         http.Handler
 	githubGocraftWeb  http.Handler
 	githubGoji        http.Handler
@@ -297,11 +295,11 @@ var (
 	githubPossum      http.Handler
 	githubR2router    http.Handler
 	githubRevel       http.Handler
-	githubRivet       http.Handler
 	githubTango       http.Handler
 	githubTigerTonic  http.Handler
 	githubTraffic     http.Handler
 	githubVulcan      http.Handler
+	githubGolf        = loadGolf(githubAPI)
 	// githubZeus        http.Handler
 )
 
@@ -311,9 +309,6 @@ func init() {
 	calcMem("Ace", func() {
 		githubAce = loadAce(githubAPI)
 	})
-	calcMem("Bear", func() {
-		githubBear = loadBear(githubAPI)
-	})
 	calcMem("Beego", func() {
 		githubBeego = loadBeego(githubAPI)
 	})
@@ -322,9 +317,6 @@ func init() {
 	})
 	calcMem("Denco", func() {
 		githubDenco = loadDenco(githubAPI)
-	})
-	calcMem("Echo", func() {
-		githubEcho = loadEcho(githubAPI)
 	})
 	calcMem("Gin", func() {
 		githubGin = loadGin(githubAPI)
@@ -377,9 +369,6 @@ func init() {
 	calcMem("Revel", func() {
 		githubRevel = loadRevel(githubAPI)
 	})
-	calcMem("Rivet", func() {
-		githubRivet = loadRivet(githubAPI)
-	})
 	calcMem("Tango", func() {
 		githubTango = loadTango(githubAPI)
 	})
@@ -391,6 +380,9 @@ func init() {
 	})
 	calcMem("Vulcan", func() {
 		githubVulcan = loadVulcan(githubAPI)
+	})
+	calcMem("Golf", func() {
+		githubGolf = loadGolf(githubAPI)
 	})
 	// calcMem("Zeus", func() {
 	// 	githubZeus = loadZeus(githubAPI)
@@ -404,10 +396,6 @@ func BenchmarkAce_GithubStatic(b *testing.B) {
 	req, _ := http.NewRequest("GET", "/user/repos", nil)
 	benchRequest(b, githubAce, req)
 }
-func BenchmarkBear_GithubStatic(b *testing.B) {
-	req, _ := http.NewRequest("GET", "/user/repos", nil)
-	benchRequest(b, githubBear, req)
-}
 func BenchmarkBeego_GithubStatic(b *testing.B) {
 	req, _ := http.NewRequest("GET", "/user/repos", nil)
 	benchRequest(b, githubBeego, req)
@@ -419,10 +407,6 @@ func BenchmarkBone_GithubStatic(b *testing.B) {
 func BenchmarkDenco_GithubStatic(b *testing.B) {
 	req, _ := http.NewRequest("GET", "/user/repos", nil)
 	benchRequest(b, githubDenco, req)
-}
-func BenchmarkEcho_GithubStatic(b *testing.B) {
-	req, _ := http.NewRequest("GET", "/user/repos", nil)
-	benchRequest(b, githubEcho, req)
 }
 func BenchmarkGin_GithubStatic(b *testing.B) {
 	req, _ := http.NewRequest("GET", "/user/repos", nil)
@@ -492,10 +476,6 @@ func BenchmarkRevel_GithubStatic(b *testing.B) {
 	req, _ := http.NewRequest("GET", "/user/repos", nil)
 	benchRequest(b, githubRevel, req)
 }
-func BenchmarkRivet_GithubStatic(b *testing.B) {
-	req, _ := http.NewRequest("GET", "/user/repos", nil)
-	benchRequest(b, githubRivet, req)
-}
 func BenchmarkTango_GithubStatic(b *testing.B) {
 	req, _ := http.NewRequest("GET", "/user/repos", nil)
 	benchRequest(b, githubTango, req)
@@ -512,6 +492,11 @@ func BenchmarkVulcan_GithubStatic(b *testing.B) {
 	req, _ := http.NewRequest("GET", "/user/repos", nil)
 	benchRequest(b, githubVulcan, req)
 }
+func BenchmarkGolf_GithubStatic(b *testing.B) {
+	req, _ := http.NewRequest("GET", "/user/repos", nil)
+	githubGolf = loadGolf(githubAPI)
+	benchRequest(b, githubGolf, req)
+}
 
 // func BenchmarkZeus_GithubStatic(b *testing.B) {
 // 	req, _ := http.NewRequest("GET", "/user/repos", nil)
@@ -522,10 +507,6 @@ func BenchmarkVulcan_GithubStatic(b *testing.B) {
 func BenchmarkAce_GithubParam(b *testing.B) {
 	req, _ := http.NewRequest("GET", "/repos/julienschmidt/httprouter/stargazers", nil)
 	benchRequest(b, githubAce, req)
-}
-func BenchmarkBear_GithubParam(b *testing.B) {
-	req, _ := http.NewRequest("GET", "/repos/julienschmidt/httprouter/stargazers", nil)
-	benchRequest(b, githubBear, req)
 }
 func BenchmarkBeego_GithubParam(b *testing.B) {
 	req, _ := http.NewRequest("GET", "/repos/julienschmidt/httprouter/stargazers", nil)
@@ -538,10 +519,6 @@ func BenchmarkBone_GithubParam(b *testing.B) {
 func BenchmarkDenco_GithubParam(b *testing.B) {
 	req, _ := http.NewRequest("GET", "/repos/julienschmidt/httprouter/stargazers", nil)
 	benchRequest(b, githubDenco, req)
-}
-func BenchmarkEcho_GithubParam(b *testing.B) {
-	req, _ := http.NewRequest("GET", "/repos/julienschmidt/httprouter/stargazers", nil)
-	benchRequest(b, githubEcho, req)
 }
 func BenchmarkGin_GithubParam(b *testing.B) {
 	req, _ := http.NewRequest("GET", "/repos/julienschmidt/httprouter/stargazers", nil)
@@ -611,10 +588,6 @@ func BenchmarkRevel_GithubParam(b *testing.B) {
 	req, _ := http.NewRequest("GET", "/repos/julienschmidt/httprouter/stargazers", nil)
 	benchRequest(b, githubRevel, req)
 }
-func BenchmarkRivet_GithubParam(b *testing.B) {
-	req, _ := http.NewRequest("GET", "/repos/julienschmidt/httprouter/stargazers", nil)
-	benchRequest(b, githubRivet, req)
-}
 func BenchmarkTango_GithubParam(b *testing.B) {
 	req, _ := http.NewRequest("GET", "/repos/julienschmidt/httprouter/stargazers", nil)
 	benchRequest(b, githubTango, req)
@@ -631,6 +604,10 @@ func BenchmarkVulcan_GithubParam(b *testing.B) {
 	req, _ := http.NewRequest("GET", "/repos/julienschmidt/httprouter/stargazers", nil)
 	benchRequest(b, githubVulcan, req)
 }
+func BenchmarkGolf_GithubParam(b *testing.B) {
+	req, _ := http.NewRequest("GET", "/repos/julienschmidt/httprouter/stargazers", nil)
+	benchRequest(b, githubGolf, req)
+}
 
 // func BenchmarkZeus_GithubParam(b *testing.B) {
 // 	req, _ := http.NewRequest("GET", "/repos/julienschmidt/httprouter/stargazers", nil)
@@ -641,9 +618,6 @@ func BenchmarkVulcan_GithubParam(b *testing.B) {
 func BenchmarkAce_GithubAll(b *testing.B) {
 	benchRoutes(b, githubAce, githubAPI)
 }
-func BenchmarkBear_GithubAll(b *testing.B) {
-	benchRoutes(b, githubBear, githubAPI)
-}
 func BenchmarkBeego_GithubAll(b *testing.B) {
 	benchRoutes(b, githubBeego, githubAPI)
 }
@@ -652,9 +626,6 @@ func BenchmarkBone_GithubAll(b *testing.B) {
 }
 func BenchmarkDenco_GithubAll(b *testing.B) {
 	benchRoutes(b, githubDenco, githubAPI)
-}
-func BenchmarkEcho_GithubAll(b *testing.B) {
-	benchRoutes(b, githubEcho, githubAPI)
 }
 func BenchmarkGin_GithubAll(b *testing.B) {
 	benchRoutes(b, githubGin, githubAPI)
@@ -707,9 +678,6 @@ func BenchmarkR2router_GithubAll(b *testing.B) {
 func BenchmarkRevel_GithubAll(b *testing.B) {
 	benchRoutes(b, githubRevel, githubAPI)
 }
-func BenchmarkRivet_GithubAll(b *testing.B) {
-	benchRoutes(b, githubRivet, githubAPI)
-}
 func BenchmarkTango_GithubAll(b *testing.B) {
 	benchRoutes(b, githubTango, githubAPI)
 }
@@ -721,6 +689,9 @@ func BenchmarkTraffic_GithubAll(b *testing.B) {
 }
 func BenchmarkVulcan_GithubAll(b *testing.B) {
 	benchRoutes(b, githubVulcan, githubAPI)
+}
+func BenchmarkGolf_GithubAll(b *testing.B) {
+	benchRoutes(b, githubGolf, githubAPI)
 }
 
 // func BenchmarkZeus_GithubAll(b *testing.B) {

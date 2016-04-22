@@ -177,7 +177,6 @@ var (
 	staticBeego       http.Handler
 	staticBone        http.Handler
 	staticDenco       http.Handler
-	staticEcho        http.Handler
 	staticGin         http.Handler
 	staticGocraftWeb  http.Handler
 	staticGoji        http.Handler
@@ -195,11 +194,11 @@ var (
 	staticPossum      http.Handler
 	staticR2router    http.Handler
 	staticRevel       http.Handler
-	staticRivet       http.Handler
 	staticTango       http.Handler
 	staticTigerTonic  http.Handler
 	staticTraffic     http.Handler
 	staticVulcan      http.Handler
+	staticGolf        http.Handler
 	// staticZeus        http.Handler
 )
 
@@ -217,9 +216,6 @@ func init() {
 	calcMem("Ace", func() {
 		staticAce = loadAce(staticRoutes)
 	})
-	calcMem("Bear", func() {
-		staticBear = loadBear(staticRoutes)
-	})
 	calcMem("Beego", func() {
 		staticBeego = loadBeego(staticRoutes)
 	})
@@ -228,9 +224,6 @@ func init() {
 	})
 	calcMem("Denco", func() {
 		staticDenco = loadDenco(staticRoutes)
-	})
-	calcMem("Echo", func() {
-		staticEcho = loadEcho(staticRoutes)
 	})
 	calcMem("Gin", func() {
 		staticGin = loadGin(staticRoutes)
@@ -283,9 +276,6 @@ func init() {
 	calcMem("Revel", func() {
 		staticRevel = loadRevel(staticRoutes)
 	})
-	calcMem("Rivet", func() {
-		staticRivet = loadRivet(staticRoutes)
-	})
 	calcMem("Tango", func() {
 		staticTango = loadTango(staticRoutes)
 	})
@@ -297,6 +287,9 @@ func init() {
 	})
 	calcMem("Vulcan", func() {
 		staticVulcan = loadVulcan(staticRoutes)
+	})
+	calcMem("Golf", func() {
+		staticGolf = loadGolf(staticRoutes)
 	})
 	// calcMem("Zeus", func() {
 	// 	staticZeus = loadZeus(staticRoutes)
@@ -324,9 +317,6 @@ func BenchmarkBone_StaticAll(b *testing.B) {
 }
 func BenchmarkDenco_StaticAll(b *testing.B) {
 	benchRoutes(b, staticDenco, staticRoutes)
-}
-func BenchmarkEcho_StaticAll(b *testing.B) {
-	benchRoutes(b, staticEcho, staticRoutes)
 }
 func BenchmarkGin_StaticAll(b *testing.B) {
 	benchRoutes(b, staticGin, staticRoutes)
@@ -379,9 +369,6 @@ func BenchmarkR2router_StaticAll(b *testing.B) {
 func BenchmarkRevel_StaticAll(b *testing.B) {
 	benchRoutes(b, staticRevel, staticRoutes)
 }
-func BenchmarkRivet_StaticAll(b *testing.B) {
-	benchRoutes(b, staticRivet, staticRoutes)
-}
 func BenchmarkTango_StaticAll(b *testing.B) {
 	benchRoutes(b, staticTango, staticRoutes)
 }
@@ -393,6 +380,9 @@ func BenchmarkTraffic_StaticAll(b *testing.B) {
 }
 func BenchmarkVulcan_StaticAll(b *testing.B) {
 	benchRoutes(b, staticVulcan, staticRoutes)
+}
+func BenchmarkGolf_StaticAll(b *testing.B) {
+	benchRoutes(b, staticGolf, staticRoutes)
 }
 
 // func BenchmarkZeus_StaticAll(b *testing.B) {
